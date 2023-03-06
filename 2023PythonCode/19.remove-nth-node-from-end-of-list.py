@@ -12,6 +12,7 @@
 #         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        '''
         cpList = []
         while head != None:
             cpList.append(head.val)
@@ -23,7 +24,19 @@ class Solution:
             sentinel.next = ListNode(val = i)
             sentinel = sentinel.next
         return res.next
+        '''
         # Can using fast-slow pointer
+        sentinel = ListNode(0, head)
+        fastPointer = head
+        slowPointer = sentinel
+        for _ in range(n):
+            fastPointer = fastPointer.next
+        while fastPointer:
+            fastPointer = fastPointer.next
+            slowPointer = slowPointer.next
+        slowPointer.next = slowPointer.next.next
+        return sentinel.next
+
         
 # @lc code=end
 
